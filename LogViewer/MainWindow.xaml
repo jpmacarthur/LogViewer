@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LogViewer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="LogViewer" Height="350" Width="525"
+        Icon="logo_icon.ico">
     <Grid>
-        
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <local:DateTimePicker x:Name="DateTimePick"></local:DateTimePicker>
+                <StackPanel VerticalAlignment="Center" Margin="20,0,0,0" Name="UTCSelector">
+                    <RadioButton Content="Local" GroupName="time" IsChecked="True"></RadioButton>
+                    <RadioButton Content="UTC" GroupName="time"></RadioButton>
+                </StackPanel>
+                <Button Content="View" VerticalAlignment="Center" Margin="20,0,0,0" Click="Button_Click"></Button>
+
+            </StackPanel>
+            <local:LogSelector x:Name="LogSel"></local:LogSelector>
+        </StackPanel>
+
     </Grid>
 </Window>
