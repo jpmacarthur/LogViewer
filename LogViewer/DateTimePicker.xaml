@@ -6,19 +6,19 @@
              xmlns:local="clr-namespace:LogViewer"
              xmlns:wpftool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             mc:Ignorable="d" d:DesignWidth="300" Height="58.848">
+             mc:Ignorable="d" d:DesignWidth="350" Height="58.848">
     <Grid Background ="White">
         <DockPanel>
             <StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Width="70">View Since</Label>
                     <DatePicker SelectedDate="{Binding SinceDate, Mode=TwoWay}" Width="125"></DatePicker>
-                    <wpftool:DateTimeUpDown x:Name="SinceDateSelector" Format="LongTime" Value="{Binding SinceTime,Mode=TwoWay}"></wpftool:DateTimeUpDown>
+                    <wpftool:DateTimeUpDown x:Name="SinceDateSelector" Format="LongTime" Value="{Binding SinceTime,Mode=TwoWay}" Width="90"></wpftool:DateTimeUpDown>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Width="70">View Until</Label>
                     <DatePicker SelectedDate="{Binding UntilDate,Mode=TwoWay}" x:Name="Until" Width="125"></DatePicker>
-                    <wpftool:DateTimeUpDown x:Name="UntilTimeSelector" Value="{Binding UntilTime,Mode=TwoWay}" Format="LongTime"></wpftool:DateTimeUpDown>
+                    <wpftool:DateTimeUpDown x:Name="UntilTimeSelector" Value="{Binding UntilTime,Mode=TwoWay}" Format="LongTime" Width="90"></wpftool:DateTimeUpDown>
                 </StackPanel>
             </StackPanel>
         </DockPanel>

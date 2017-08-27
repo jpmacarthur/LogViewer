@@ -27,6 +27,8 @@ namespace LogViewer
     {
         public RadioButton rad;
         public bool UTCYes = false;
+        TabControl MainTab = new TabControl();
+        Window logview;
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public ProjectControlSource source = PersistableJson.Load<ProjectControlSource>();
@@ -34,7 +36,17 @@ namespace LogViewer
         {
             Logger.Setup();
             InitializeComponent();
+            logview = new Window();
+            logview.Closed += Logview_Closed;
            
+        }
+
+        private void Logview_Closed(object sender, EventArgs e)
+        {
+            logview = new Window();
+            logview.Closed += Logview_Closed;
+            MainTab.Items.Clear();
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -44,7 +56,6 @@ namespace LogViewer
             DateTime sincetime = DateTimePick.SinceDate;
             DateTime untiltime = DateTimePick.UntilDate;
 
-            Window logview = new Window();
             foreach(RadioButton rb in LogSel.Logs.Children)
             {
                 if(rb.IsChecked == true)
@@ -62,12 +73,20 @@ namespace LogViewer
             }
             if(rad != null)
             {
-            Viewer.Viewer views = new Viewer.Viewer {UTCYes= this.UTCYes };
-            logview.Content = views;
-            logview.Title = rad.Content.ToString();
-            views.UTCYes = this.UTCYes;
-            logview.Show();
-            (logview.Content as Viewer.Viewer).UTCYes = this.UTCYes;
+                Viewer.Viewer views = new Viewer.Viewer {UTCYes= this.UTCYes };
+
+                TabItem LogTab = new TabItem();
+                LogTab.Header = rad.Content.ToString();
+                LogTab.Content = views;
+                
+                MainTab.Items.Add(LogTab);
+                logview.Content = MainTab;
+                logview.Title = "Logs";
+                views.UTCYes = this.UTCYes;
+                MainTab.SelectedIndex = MainTab.Items.Count-1;
+                logview.Show();
+                logview.Focus();
+                //(logview.Content as Viewer.Viewer).UTCYes = this.UTCYes;
             }
 
         }
